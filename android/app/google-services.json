@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "192627423313",
+    "firebase_url": "https://tripsapp-26cc7.firebaseio.com",
+    "project_id": "tripsapp-26cc7",
+    "storage_bucket": "tripsapp-26cc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192627423313:android:054320c0cbcda05cb12070",
+        "android_client_info": {
+          "package_name": "com.laika.trips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192627423313-8r73lj7rrtogc1j4gcosj3ekhg9b346m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.laika.trips",
+            "certificate_hash": "65dd77bf073f10699355f5ccefc07b08e5611583"
+          }
+        },
+        {
+          "client_id": "192627423313-a5icbj979aa26e2l1rq7uib5i99u63u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrkGc_AquFaDRZY41uwGF3tLhtjIPXJyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192627423313-a5icbj979aa26e2l1rq7uib5i99u63u9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
