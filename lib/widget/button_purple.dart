@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ButtonCircular extends StatelessWidget {
+class ButtonPurple extends StatelessWidget {
   String _title;
   EdgeInsetsGeometry _margin;
 
-  ButtonCircular({String title, EdgeInsetsGeometry margin}) {
+  ButtonPurple({String title, EdgeInsetsGeometry margin}) {
     this._title = title;
     this._margin = margin;
   }

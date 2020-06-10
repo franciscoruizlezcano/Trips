@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "192627423313-8r73lj7rrtogc1j4gcosj3ekhg9b346m.apps.googleusercontent.com",
+          "client_id": "192627423313-ta32qq7i2tbitc7a6t48v1c8l6trspjo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.laika.trips",
-            "certificate_hash": "65dd77bf073f10699355f5ccefc07b08e5611583"
+            "certificate_hash": "edbf410e85150c67a66a42a6ba7597bb207d54da"
           }
         },
         {

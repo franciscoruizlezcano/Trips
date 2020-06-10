@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:trips/user/bloc/user_bloc.dart';
+import 'package:trips/user/ui/screen/signin_screen.dart';
 import 'package:trips/widget/navigation_bar.dart';
 
 void main() {
@@ -20,10 +21,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        //home: DesignersPage(),
-        home: Scaffold(
+        home: SignInScreen(),
+        /*home: Scaffold(
           body: NavigationBar(),
-        )
+        )*/
       )
     );
   }

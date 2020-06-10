@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:trips/user/bloc/user_bloc.dart';
 import 'package:trips/user/ui/widget/user_info.dart';
 import 'package:trips/widget/gradient_back.dart';
 
 class HeaderAppbar extends StatelessWidget {
   String _title;
+  UserBloc _userBloc;
 
   HeaderAppbar({String title}) {
     this._title = title;
@@ -11,6 +14,8 @@ class HeaderAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    this._userBloc = BlocProvider.of(context);
+
     return Stack(
       children: <Widget>[
         GradientBack(

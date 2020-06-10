@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trips/place/ui/widget/review_list.dart';
 import 'package:trips/place/ui/widget/star.dart';
-import 'package:trips/widget/button_circular.dart';
+import 'package:trips/widget/button_purple.dart';
 
 class DescriptionPlace extends StatelessWidget {
   String _title;
@@ -60,7 +60,7 @@ class DescriptionPlace extends StatelessWidget {
         title_stars,
         description,
         all_reviews,
-        ButtonCircular(
+        ButtonPurple(
           title: "Navigate",
           margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 200.0, bottom: 20.0),
         ),
