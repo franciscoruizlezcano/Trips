@@ -1,37 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:trips/user/bloc/user_bloc.dart';
+import 'package:trips/user/model/user.dart';
 
 class UserInfo extends StatelessWidget {
-  String _fullname;
-  String _email;
-  String _pathImage;
-
-  UserInfo({String fullname, String email, String pathImage}) {
-    this._fullname = fullname;
-    this._email = email;
-    this._pathImage = pathImage;
-  }
+  UserBloc _userBloc;
 
   @override
   Widget build(BuildContext context) {
-    final fullname = Container(
-      child: Text(
-        this._fullname,
-        textAlign: TextAlign.left,
-        style: TextStyle(fontSize: 26.0, color: Colors.white),
-      ),
-    );
+    this._userBloc = BlocProvider.of<UserBloc>(context);
 
-    final email = Text(
-      this._email,
-      textAlign: TextAlign.left,
-      style: TextStyle(color: Colors.white, fontSize: 16.0),
+    return StreamBuilder(
+      stream: this._userBloc.authStatus,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        Widget widget;
+        switch(snapshot.connectionState){
+          case ConnectionState.waiting:
+            widget = CircularProgressIndicator();
+            break;
+          case ConnectionState.none:
+            widget = CircularProgressIndicator();
+            break;
+          case ConnectionState.active:
+            widget = this._showProfileData(snapshot);
+            break;
+          case ConnectionState.done:
+            widget = this._showProfileData(snapshot);
+            break;
+        }
+        return widget;
+      }
     );
+  }
 
-    final fullname_email = Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[fullname, email],
-      ),
+  Widget _showProfileData(AsyncSnapshot snapshot){
+    Widget widget;
+    if(!snapshot.hasData || snapshot.hasError){
+      widget = Container(
+        child: Column(
+          children: [
+            CircularProgressIndicator(),
+            Text(
+                "Error in the load user",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0
+              ),
+            )
+          ],
+        ),
+      );
+    }else{
+      User user = new User(
+        uid: snapshot.data.uid,
+        name: snapshot.data.displayName,
+        email: snapshot.data.email,
+        photoUrl: snapshot.data.photoUrl
+      );
+      print(user.uid);
+      widget = this._getUserInfoWidget(user);
+    }
+    return widget;
+  }
+
+  Widget _getUserInfoWidget(User user){
+    final name_email = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          user.name,
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: 23.0, color: Colors.white),
+        ),
+        Text(
+          user.email,
+          textAlign: TextAlign.left,
+          style: TextStyle(color: Colors.white, fontSize: 15.0),
+        )
+      ],
     );
 
     final photo = Container(
@@ -41,68 +87,18 @@ class UserInfo extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white, width: 2.0),
         shape: BoxShape.circle,
-        image: DecorationImage(
-            fit: BoxFit.cover, image: AssetImage(this._pathImage)),
+        image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(user.photoUrl)),
       ),
     );
 
-    final options = Container(
-      child: Row(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Container(
-            height: 30.0,
-            width: 30.0,
-            margin: EdgeInsets.all(15.0),
-            child: Icon(
-              Icons.note,
-              color: Colors.blue,
-              size: 15.0,
-            ),
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(255, 255, 255, 0.7)),
-          ),
-          Container(
-            height: 45.0,
-            width: 45.0,
-            margin: EdgeInsets.all(15.0),
-            child: Icon(
-              Icons.add,
-              color: Colors.blue,
-            ),
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-          ),
-          Container(
-            height: 30.0,
-            width: 30.0,
-            margin: EdgeInsets.all(15.0),
-            child: Icon(
-              Icons.exit_to_app,
-              color: Colors.blue,
-              size: 15.0,
-            ),
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(255, 255, 255, 0.7)),
-          ),
-        ],
-      ),
-    );
-
-    return Container(
-      margin: EdgeInsets.only(top: 100.0),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                photo, 
-                Expanded(child: fullname_email),
-              ]
-            ),
-            options
+          Row(children: <Widget>[
+            photo,
+            Expanded(child: name_email),
           ]),
+        ]
     );
   }
 }

@@ -17,14 +17,27 @@ class HeaderAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        GradientBack(
-          title: this._title,
-          height: 250.0,
-        ),
-        CardImageList(
-          scrollDirection: Axis.horizontal,
-          children: this._cardImageList,
-          height: 320.0,
+        GradientBack(height: 250.0, width: MediaQuery.of(context).size.width,circle: true),
+        Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(top: 30.0, bottom: 30.0, left: 20.0),
+              child: Text(
+                "Welcome",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+            CardImageList(
+              scrollDirection: Axis.horizontal,
+              children: this._cardImageList,
+              height: 200.0,
+            )
+          ],
         )
       ],
     );

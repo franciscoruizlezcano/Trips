@@ -2,22 +2,27 @@ import 'package:flutter/material.dart';
 
 class GradientBack extends StatelessWidget {
 
-  String _title;
-  double _height;
-  BorderRadiusGeometry _borderRadius;
+  double width;
+  double height;
+  BorderRadiusGeometry borderRadius;
+  bool circle = false;
 
-  GradientBack({String title, double height, BorderRadiusGeometry borderRadius}){
-    this._title = title;
-    this._height = height;
-    this._borderRadius = borderRadius;
-  }
+  GradientBack({Key key, @required this.width, @required this.height, @required this.borderRadius, @required this.circle});
+
 
   @override
   Widget build(BuildContext context) {
+    Widget child;
+
+    if(this.circle){
+      child = this._getCircle();
+    }
+
     return Container(
-      height: this._height,
+      height: this.height,
+      width: this.width,
       decoration: BoxDecoration(
-        borderRadius: this._borderRadius,
+        borderRadius: this.borderRadius,
         gradient: LinearGradient(
           colors: [
             Color(0xFF4268D3),
@@ -29,15 +34,22 @@ class GradientBack extends StatelessWidget {
           tileMode: TileMode.clamp
         ),
       ),
-      child: Text(
-        this._title,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold
+      child: child,
+    );
+  }
+
+  Widget _getCircle(){
+    return FittedBox(
+      fit: BoxFit.none,
+      alignment: Alignment(-2.5, -0.8),
+      child: Container(
+        width: this.height,
+        height: this.height,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(0, 0, 0, 0.05),
+          borderRadius: BorderRadius.circular(this.height / 2),
         ),
       ),
-      alignment: Alignment(-0.9, -0.6),
     );
   }
 }

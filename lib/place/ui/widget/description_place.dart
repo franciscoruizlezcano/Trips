@@ -17,7 +17,7 @@ class DescriptionPlace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = Container(
-        margin: EdgeInsets.only(top: 350.0, left: 20.0, right: 20.0),
+        margin: EdgeInsets.only(top: 300.0, left: 20.0, right: 20.0),
         child: Text(
           this._title,
           style: TextStyle(
@@ -28,7 +28,7 @@ class DescriptionPlace extends StatelessWidget {
         ));
 
     final stars = Row(
-      children: Star().getStarList(this._stars, EdgeInsets.only(top: 353.0, right: 3.0)),
+      children: Star().getStarList(this._stars, EdgeInsets.only(top: 303.0, right: 3.0)),
     );
 
     final title_stars = Row(

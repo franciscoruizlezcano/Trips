@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trips/user/bloc/user_bloc.dart';
+import 'package:trips/user/model/user.dart';
 import 'package:trips/widget/button_green.dart';
 import 'package:trips/widget/gradient_back.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -44,22 +45,30 @@ class _SignInScreenState extends State<SignInScreen>{
       body: Stack(
         alignment: Alignment.center,
         children: [
-          GradientBack(
-            title: "",
-            height: MediaQuery.of(context).size.height,
-          ),
+          GradientBack(height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width,circle: true,),
           Container(
             padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
             child: Column(
               children: [
-                Text(
-                  "Welcome. \nThis is Travel App",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 37.0
-                  ),
+                //Desbordamiento del texto
+                Flexible(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      top: 30.0,
+                      left: 30.0,
+                      right: 30.0
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      "Welcome. \nThis is Travel App",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 37.0
+                      ),
+                    ),
+                  )
                 ),
                 ButtonGreen(
                   title: "Sign in with Gmail",
@@ -70,7 +79,10 @@ class _SignInScreenState extends State<SignInScreen>{
                   ),
                   height: 60.0,
                   onTap: (){
-                    _userBloc.signIn().then((FirebaseUser user) => print(user.displayName));
+                    _userBloc.signOut();
+                    _userBloc.signIn().then((FirebaseUser user){
+                      _userBloc.updateData(new User(uid: user.uid, name: user.displayName, email: user.email, photoUrl: user.photoUrl));
+                    });
                   },
                 )
               ],

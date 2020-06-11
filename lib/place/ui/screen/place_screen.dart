@@ -27,8 +27,6 @@ class PlaceScreen extends StatelessWidget {
       );
     }
 
-
-
     return Stack(
       children: <Widget>[
         ListView(

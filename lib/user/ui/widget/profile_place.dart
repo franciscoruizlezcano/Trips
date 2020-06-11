@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:trips/place/model/place.dart';
 import 'package:trips/widget/floating_action_button.dart';
 
-class DescriptionCard extends StatelessWidget {
+class ProfilePlace extends StatelessWidget {
 
-  String _title;
-  String _description;
+  Place _place;
 
 
-  DescriptionCard({String title, String description}){
-    this._title = title;
-    this._description = description;
+  ProfilePlace({Place place}){
+    this._place = place;
   }
 
   @override
@@ -35,7 +34,7 @@ class DescriptionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            this._title,
+            this._place.name,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -43,7 +42,7 @@ class DescriptionCard extends StatelessWidget {
             ),
           ),
           Text(
-            this._description,
+            this._place.description,
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.0

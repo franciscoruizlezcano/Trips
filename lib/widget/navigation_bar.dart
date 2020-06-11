@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 import 'package:trips/place/ui/screen/place_screen.dart';
+import 'package:trips/user/bloc/user_bloc.dart';
 import 'package:trips/user/ui/screen/search_screen.dart';
-import 'package:trips/user/ui/screen/user_screen.dart';
+import 'package:trips/user/ui/screen/profile_screen.dart';
 
 
 class NavigationBar extends StatefulWidget {
@@ -16,9 +18,9 @@ class _NavigationBarState extends State<NavigationBar> {
   int _indexTap = 0;
 
   List<Widget> _pageList = [
-    PlaceScreen(),
-    SearchScreen(),
-    UserScreen()
+    BlocProvider<UserBloc>(child: PlaceScreen(), bloc: UserBloc()),
+    BlocProvider<UserBloc>(child: SearchScreen(), bloc: UserBloc()),
+    BlocProvider<UserBloc>(child: ProfileScreen(), bloc: UserBloc()),
   ];
 
   void _onTapTapped(int index){

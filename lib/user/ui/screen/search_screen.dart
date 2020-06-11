@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trips/user/ui/widget/buttons_bar.dart';
 import 'package:trips/user/ui/widget/user_experience.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -13,7 +14,8 @@ class SearchScreen extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: ListView(
+      body: ButtonsBar(),
+      /*/body: ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
           Column(
@@ -56,7 +58,7 @@ class SearchScreen extends StatelessWidget {
             ],
           )
         ],
-      ),
+      ),*/
     );
   }
 }
