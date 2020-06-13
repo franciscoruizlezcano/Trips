@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:trips/place/bloc/place_bloc.dart';
 import 'package:trips/place/model/place.dart';
+import 'package:trips/user/bloc/user_bloc.dart';
 import 'package:trips/widget/button_submit.dart';
 import 'package:trips/widget/card_image.dart';
 import 'package:trips/widget/floating_action_button.dart';
@@ -17,7 +20,7 @@ class AddPlaceScreen extends StatefulWidget{
 
   File image;
 
-  AddPlaceScreen({Key key, this.image, });
+  AddPlaceScreen({Key key, this.image});
 
   @override
   _AddPlaceScreenState createState() {
@@ -36,6 +39,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen>{
   @override
   Widget build(BuildContext context) {
 
+    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     PlaceBloc placeBloc =  BlocProvider.of<PlaceBloc>(context);
 
     // TODO: implement build
@@ -82,12 +86,28 @@ class _AddPlaceScreenState extends State<AddPlaceScreen>{
                           title: "Add place",
                           onPressed:(){
                             //1. Firebase storage
+                            // url
+                            String urlImage = "";
+                            //ID user logged
+                            userBloc.currentUser.then((FirebaseUser user){
+                              if(user != null){
+                                String uid = user.uid;
+                                String path = uid + "/" + DateTime.now().toString() + ".jpg";
+                                placeBloc.uploadFile(path, widget.image).then((StorageUploadTask storageUploadTask){
+                                  storageUploadTask.onComplete.then((StorageTaskSnapshot snapshot){
+                                    snapshot.ref.getDownloadURL().then((value){
+                                      urlImage = value;
+                                    });
+                                  });
+                                });
+                              }
+                            });
                             //2. Cloud firebase
                             placeBloc.updateData(
-                                Place(
+                                new Place(
                                   name: this._controllerTitle.text,
                                   description: this._controllerDescription.text,
-                                  urlImage: widget.image.path,
+                                  urlImage: urlImage,
                                   likes: 0,
                                 )
                             ).whenComplete((){

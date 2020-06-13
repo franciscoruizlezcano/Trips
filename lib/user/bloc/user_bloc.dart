@@ -17,6 +17,10 @@ class UserBloc implements Bloc {
     return this._streamFirebase;
   }
 
+  Future<FirebaseUser> get currentUser{
+    return FirebaseAuth.instance.currentUser();
+  }
+
   Future<FirebaseUser> signIn(){
     return _authRepository.signInFirebase();
   }
