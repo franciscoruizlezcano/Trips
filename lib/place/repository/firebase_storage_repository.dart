@@ -5,7 +5,7 @@ import 'package:trips/place/repository/firebase_storage_api.dart';
 
 class FirebaseStorageRepository{
 
-  FirebaseStorageAPI _firebaseStorageAPI;
+  FirebaseStorageAPI _firebaseStorageAPI = new FirebaseStorageAPI();
 
   Future<StorageUploadTask> uploadFileFirestorage(String path, File image) async{
     return _firebaseStorageAPI.uploadFile(path, image);

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trips/place/model/place.dart';
+import 'package:trips/widget/card_image.dart';
 import 'package:trips/widget/floating_action_button.dart';
 
 // ignore: must_be_immutable
 class ProfilePlace extends StatelessWidget {
 
-  Place _place;
+  Place place;
 
-  ProfilePlace({Place place}){
-    this._place = place;
-  }
+  ProfilePlace({@required this.place});
 
   @override
   Widget build(BuildContext context) {
@@ -32,35 +31,50 @@ class ProfilePlace extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            this._place.name,
+            this.place.name,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: 20.0
+              fontSize: 18.0
             ),
           ),
           Text(
-            this._place.description,
+            this.place.description,
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.0
             ),
-          )
+          ),
+          Text(
+            "Likes: " + this.place.likes.toString(),
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 12.0
+            ),
+          ),
         ],
       ),
     );
 
-    return Stack(
-      alignment: Alignment.bottomRight,
-      children: <Widget>[
-        card,
-        FloatingActionButtonGreen(
-          onPressed:  () => Scaffold.of(context).showSnackBar(SnackBar(content: Text("Naving"))),
-          icon: Icon(Icons.favorite),
-        )
-      ],
+    return Container(
+      margin: EdgeInsets.only(bottom: 40),
+      padding: EdgeInsets.only(bottom: 40),
+      child: CardImage(
+        height: 200.0,
+        width: MediaQuery.of(context).size.width,
+        image: NetworkImage(this.place.urlImage),
+        alignment: Alignment(0, 2),
+        child: Stack(
+          alignment: Alignment.bottomRight,
+          children: <Widget>[
+            card,
+            FloatingActionButtonGreen(icon: Icon(Icons.favorite), onPressed: null,)
+          ],
+        ),
+      ),
     );
   }
 }

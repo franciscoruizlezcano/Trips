@@ -5,65 +5,12 @@ import 'package:trips/user/model/user.dart';
 
 // ignore: must_be_immutable
 class UserInfo extends StatelessWidget {
-  UserBloc _userBloc;
+  User user;
+
+  UserInfo({this.user});
 
   @override
   Widget build(BuildContext context) {
-    this._userBloc = BlocProvider.of<UserBloc>(context);
-
-    return StreamBuilder(
-      stream: this._userBloc.authStatus,
-      builder: (BuildContext context, AsyncSnapshot snapshot){
-        Widget widget;
-        switch(snapshot.connectionState){
-          case ConnectionState.waiting:
-            widget = CircularProgressIndicator();
-            break;
-          case ConnectionState.none:
-            widget = CircularProgressIndicator();
-            break;
-          case ConnectionState.active:
-            widget = this._showProfileData(snapshot);
-            break;
-          case ConnectionState.done:
-            widget = this._showProfileData(snapshot);
-            break;
-        }
-        return widget;
-      }
-    );
-  }
-
-  Widget _showProfileData(AsyncSnapshot snapshot){
-    Widget widget;
-    if(!snapshot.hasData || snapshot.hasError){
-      widget = Container(
-        child: Column(
-          children: [
-            CircularProgressIndicator(),
-            Text(
-                "Error in the load user",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0
-              ),
-            )
-          ],
-        ),
-      );
-    }else{
-      User user = new User(
-        uid: snapshot.data.uid,
-        name: snapshot.data.displayName,
-        email: snapshot.data.email,
-        photoUrl: snapshot.data.photoUrl
-      );
-      widget = this._getUserInfoWidget(user);
-    }
-    return widget;
-  }
-
-  Widget _getUserInfoWidget(User user){
     final nameEmail = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

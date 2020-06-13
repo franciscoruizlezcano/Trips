@@ -9,7 +9,6 @@ import 'package:trips/place/model/place.dart';
 import 'package:trips/user/bloc/user_bloc.dart';
 import 'package:trips/widget/button_submit.dart';
 import 'package:trips/widget/card_image.dart';
-import 'package:trips/widget/floating_action_button.dart';
 import 'package:trips/widget/gradient_back.dart';
 import 'package:trips/widget/header_appbar.dart';
 import 'package:trips/widget/location_input.dart';
@@ -42,6 +41,25 @@ class _AddPlaceScreenState extends State<AddPlaceScreen>{
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     PlaceBloc placeBloc =  BlocProvider.of<PlaceBloc>(context);
 
+    void uploadPlace() async{
+      //1. Firebase storage
+      Place place = new Place( name: this._controllerTitle.text, description: this._controllerDescription.text, location: this._controllerLocation.text,likes: 0);
+      //ID user logged
+      FirebaseUser user = await userBloc.currentUser;
+      if(user != null){
+        String uid = user.uid;
+        String path = uid + "/" + DateTime.now().toString() + ".jpg";
+        StorageUploadTask storageUploadTask = await placeBloc.uploadFile(path, widget.image);
+        StorageTaskSnapshot snapshot = await storageUploadTask.onComplete;
+        place.urlImage = await snapshot.ref.getDownloadURL();
+
+      }
+      //2. Cloud firebase
+      placeBloc.updateData(place).whenComplete((){
+        Navigator.of(context).pop();
+      });
+    }
+
     // TODO: implement build
     return Scaffold(
       body: Builder(
@@ -60,9 +78,9 @@ class _AddPlaceScreenState extends State<AddPlaceScreen>{
                     padding: EdgeInsets.only(top: 40.0, right: 20.0 ,left: 20.0),
                     children: [
                       CardImage(
-                        height: 200.0,
+                        height: 300.0,
                         width: MediaQuery.of(context).size.width,
-                        pathImage: widget.image.path,
+                        image: FileImage(widget.image),
                         alignment: Alignment.bottomRight,
                         child: null,
                       ),
@@ -84,36 +102,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen>{
                       ButtonSubmit(
                           margin: EdgeInsets.only(right: MediaQuery.of(context).size.width/2),
                           title: "Add place",
-                          onPressed:(){
-                            //1. Firebase storage
-                            // url
-                            String urlImage = "";
-                            //ID user logged
-                            userBloc.currentUser.then((FirebaseUser user){
-                              if(user != null){
-                                String uid = user.uid;
-                                String path = uid + "/" + DateTime.now().toString() + ".jpg";
-                                placeBloc.uploadFile(path, widget.image).then((StorageUploadTask storageUploadTask){
-                                  storageUploadTask.onComplete.then((StorageTaskSnapshot snapshot){
-                                    snapshot.ref.getDownloadURL().then((value){
-                                      urlImage = value;
-                                    });
-                                  });
-                                });
-                              }
-                            });
-                            //2. Cloud firebase
-                            placeBloc.updateData(
-                                new Place(
-                                  name: this._controllerTitle.text,
-                                  description: this._controllerDescription.text,
-                                  urlImage: urlImage,
-                                  likes: 0,
-                                )
-                            ).whenComplete((){
-                              Navigator.of(context).pop();
-                            });
-                          }
+                          onPressed: uploadPlace
                       ),
                     ],
                   ),
@@ -126,5 +115,4 @@ class _AddPlaceScreenState extends State<AddPlaceScreen>{
       )
     );
   }
-
 }

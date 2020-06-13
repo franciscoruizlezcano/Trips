@@ -31,18 +31,44 @@ class CloudFirestoreAPI{
     CollectionReference ref = _db.collection(PLACES);
 
     final FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseUser user = await auth.currentUser();
 
-    await auth.currentUser().then((FirebaseUser user){
-      ref.add({
+    ref.add({
       "id": place.id,
       "name": place.name,
       "description": place.description,
+      "location": place.location,
       "urlImage": place.urlImage,
       "likes": place.likes,
-      "creatorUser": "$USERS/${user.uid}", //type data: reference
+      "creatorUser": _db.document("$USERS/${user.uid}"), //type data: reference
+    }).then((DocumentReference dr) async{
+      DocumentSnapshot snapshot = await dr.get();
+      DocumentReference refUser = _db.collection(USERS).document(user.uid);
+      refUser.updateData({
+        'places' : FieldValue.arrayUnion([_db.document("$PLACES/${snapshot.documentID}")])
       });
     });
 
+  }
 
+  List<Place> find(List<DocumentSnapshot> documentSnapshotList){
+    List<Place> response = new List<Place>();
+
+    documentSnapshotList.forEach((element) {
+      Place place = new Place();
+
+      //Set data
+      place.id = element.data['id'];
+      place.name = element.data['name'];
+      place.description = element.data['description'];
+      place.urlImage = element.data['urlImage'];
+      place.likes = element.data['likes'];
+      place.location = element.data['location'];
+
+
+      response.add(place);
+    });
+
+    return response;
   }
 }
