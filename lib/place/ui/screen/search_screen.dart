@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:trips/user/ui/widget/buttons_bar.dart';
-import 'package:trips/user/ui/widget/user_experience.dart';
 
 class SearchScreen extends StatelessWidget {
   @override

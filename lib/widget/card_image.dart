@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trips/widget/floating_action_button.dart';
 
+// ignore: must_be_immutable
 class CardImage extends StatelessWidget {
   String _pathImage;
   double _height;
@@ -38,12 +38,16 @@ class CardImage extends StatelessWidget {
           ]),
     );
 
+    List<Widget> children = new List<Widget>();
+    children.add(card);
+
+    if(this._child != null){
+      children.add(this._child);
+    }
+
     return Stack(
       alignment: this._alignment,
-      children: <Widget>[
-        card,
-        this._child
-      ],
+      children: children,
     );
   }
 }

@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:trips/place/ui/widget/user_details.dart';
 
+// ignore: must_be_immutable
 class Review extends StatelessWidget {
   String _fullname;
   int _reviews;
   int _photos;
-  int _stars;
   String _comment;
   String _pathImage;
 
-  Review({String fullname, String comment, String pathImage, int reviews, int photos, int stars}) {
+  Review({String fullname, String comment, String pathImage, int reviews, int photos}) {
     this._fullname = fullname;
     this._comment = comment;
     this._pathImage = pathImage;
     this._reviews = reviews;
     this._photos = photos;
-    this._stars = stars;
   }
 
   @override

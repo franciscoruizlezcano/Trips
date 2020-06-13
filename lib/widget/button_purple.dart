@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ButtonPurple extends StatelessWidget {
-  String _title;
-  EdgeInsetsGeometry _margin;
+  String title;
+  EdgeInsetsGeometry margin;
+  VoidCallback onTap;
 
-  ButtonPurple({String title, EdgeInsetsGeometry margin}) {
-    this._title = title;
-    this._margin = margin;
-  }
+  ButtonPurple({@required this.title, @required this.onTap,this.margin});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text("Naving"))
-        );
-      },
+      onTap: this.onTap,
       child: Container(
-        margin: this._margin,
+        margin: this.margin,
         height: 50.0,
         width: 180.0,
         decoration: BoxDecoration(
@@ -36,7 +31,7 @@ class ButtonPurple extends StatelessWidget {
           ),
           child:Center(
             child: Text(
-              this._title, 
+              this.title,
               style: TextStyle(
                 fontSize: 18.0,
                 color: Colors.white, 

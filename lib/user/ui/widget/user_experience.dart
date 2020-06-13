@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class UserExperience extends StatelessWidget {
 
-  String _fullname;
-  int _experience;
-  String _pathImage;
+  String fullname;
+  int experience;
+  String pathImage;
 
-  UserExperience({String fullname, int experience, String pathImage}){
-    this._fullname = fullname;
-    this._experience = experience;
-    this._pathImage = pathImage;
-  }
+  UserExperience({this.fullname, this.experience, this.pathImage});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class UserExperience extends StatelessWidget {
         shape: BoxShape.circle,
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage(this._pathImage),
+          image: AssetImage(this.pathImage),
         ),
       ),
     );
@@ -33,7 +30,7 @@ class UserExperience extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            this._fullname,
+            this.fullname,
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -41,7 +38,7 @@ class UserExperience extends StatelessWidget {
             ),
           ),
           Text(
-            "Experience: ${this._experience} years",
+            "Experience: ${this.experience} years",
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 10.0

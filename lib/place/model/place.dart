@@ -12,11 +12,11 @@ class Place {
 
   Place({
     Key key,
-    @required this.id,
+    this.id,
     @required this.name,
     @required this.description,
-    @required this.urlImage,
+    this.urlImage,
     this.likes,
-    @required this.creatorUser,
+    this.creatorUser,
   });
 }

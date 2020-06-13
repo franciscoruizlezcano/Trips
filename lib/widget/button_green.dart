@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ButtonGreen extends StatefulWidget {
-  String _title;
-  EdgeInsetsGeometry _margin;
-  double _width;
-  double _height;
-  void Function() _onTap;
+  String title;
+  EdgeInsetsGeometry margin;
+  double width;
+  double height;
+  void Function() onTap;
 
-  ButtonGreen({@required String title, EdgeInsetsGeometry margin, double width, double height, @required void Function() onTap}) {
-    this._title = title;
-    this._margin = margin;
-    this._width = width;
-    this._height = height;
-    this._onTap = onTap;
-  }
+  ButtonGreen({@required this.title, this.margin, this.width, this.height, @required this.onTap});
 
   @override
   State createState() {
@@ -22,29 +17,15 @@ class ButtonGreen extends StatefulWidget {
 }
 
 class _ButtonGreenState extends State<ButtonGreen> {
-  String _title;
-  EdgeInsetsGeometry _margin;
-  double _width;
-  double _height;
-  void Function() _onTap;
-
-  _ButtonGreenState({String title, EdgeInsetsGeometry margin, double width, double height, void Function() onTap}) {
-    this._title = title;
-    this._margin = margin;
-    this._width = width;
-    this._height = height;
-    this._onTap = onTap;
-  }
-
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: widget._onTap,
+        onTap: widget.onTap,
         child: Container(
-        margin: widget._margin,
-        height: widget._height,
-        width: widget._width,
+        margin: widget.margin,
+        height: widget.height,
+        width: widget.width,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             gradient: LinearGradient(
@@ -60,7 +41,7 @@ class _ButtonGreenState extends State<ButtonGreen> {
         ),
         child: Center(
           child: Text(
-              widget._title,
+              widget.title,
               style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,

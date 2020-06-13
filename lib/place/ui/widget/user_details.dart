@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class UserDetails extends StatelessWidget {
-  String _fullname;
-  int _reviews;
-  int _photos;
-  String _comment;
+  String fullname;
+  int reviews;
+  int photos;
+  String comment;
 
-  UserDetails({String fullname, String comment, int reviews, int photos}) {
-    this._fullname = fullname;
-    this._reviews = reviews;
-    this._photos = photos;
-    this._comment = comment;
-  }
+  UserDetails({Key key, @required this.fullname, @required this.comment, @required this.reviews, @required this.photos});
 
   @override
   Widget build(BuildContext context) {
     final fullname = Text(
-      this._fullname,
+      this.fullname,
       textAlign: TextAlign.left,
       style: TextStyle(
         fontSize: 23.0,
@@ -27,7 +23,7 @@ class UserDetails extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(
-            "${this._reviews} reviews · ${this._photos} photos",
+            "${this.reviews} reviews · ${this.photos} photos",
             textAlign: TextAlign.left,
             style: TextStyle(fontSize: 17.0),
           ),
@@ -38,7 +34,7 @@ class UserDetails extends StatelessWidget {
     final comment = Container(
         margin: EdgeInsets.only(top: 5.0, right: 30.0),
         child: Text(
-          this._comment,
+          this.comment,
           textAlign: TextAlign.justify,
           style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w900),
         ));

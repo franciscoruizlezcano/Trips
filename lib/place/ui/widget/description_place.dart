@@ -3,6 +3,7 @@ import 'package:trips/place/ui/widget/review_list.dart';
 import 'package:trips/place/ui/widget/star.dart';
 import 'package:trips/widget/button_purple.dart';
 
+// ignore: must_be_immutable
 class DescriptionPlace extends StatelessWidget {
   String _title;
   String _description;
@@ -31,7 +32,7 @@ class DescriptionPlace extends StatelessWidget {
       children: Star().getStarList(this._stars, EdgeInsets.only(top: 303.0, right: 3.0)),
     );
 
-    final title_stars = Row(
+    final titleStars = Row(
       children: <Widget>[title, stars],
     );
 
@@ -45,7 +46,7 @@ class DescriptionPlace extends StatelessWidget {
       ),
     );
 
-    final all_reviews = Container(
+    final allReviews = Container(
       margin: EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0),
       child: Text(
         "All reviews",
@@ -57,12 +58,13 @@ class DescriptionPlace extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        title_stars,
+        titleStars,
         description,
-        all_reviews,
+        allReviews,
         ButtonPurple(
           title: "Navigate",
           margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 200.0, bottom: 20.0),
+          onTap: () => Scaffold.of(context).showSnackBar(SnackBar(content: Text("Naving"))),
         ),
         ReviewList()
       ],

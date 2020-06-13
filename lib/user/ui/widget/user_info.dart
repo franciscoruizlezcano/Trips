@@ -3,6 +3,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:trips/user/bloc/user_bloc.dart';
 import 'package:trips/user/model/user.dart';
 
+// ignore: must_be_immutable
 class UserInfo extends StatelessWidget {
   UserBloc _userBloc;
 
@@ -57,14 +58,13 @@ class UserInfo extends StatelessWidget {
         email: snapshot.data.email,
         photoUrl: snapshot.data.photoUrl
       );
-      print(user.uid);
       widget = this._getUserInfoWidget(user);
     }
     return widget;
   }
 
   Widget _getUserInfoWidget(User user){
-    final name_email = Column(
+    final nameEmail = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
@@ -95,8 +95,7 @@ class UserInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Row(children: <Widget>[
-            photo,
-            Expanded(child: name_email),
+            photo, Expanded(child: nameEmail),
           ]),
         ]
     );

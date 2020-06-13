@@ -18,7 +18,6 @@ class _ReviewListState extends State<ReviewList> {
           pathImage: "assets/images/people.jpg",
           photos: 5,
           reviews: 10,
-          stars: 5,
         ),
         Review(
           fullname: "Emma Watson",
@@ -26,7 +25,6 @@ class _ReviewListState extends State<ReviewList> {
           pathImage: "assets/images/girl.jpg",
           photos: 5,
           reviews: 10,
-          stars: 4,
         ),
         Review(
           fullname: "Chris O'Donnell",
@@ -34,7 +32,6 @@ class _ReviewListState extends State<ReviewList> {
           pathImage: "assets/images/people.jpg",
           photos: 5,
           reviews: 2,
-          stars: 3,
         ),
       ],
     );

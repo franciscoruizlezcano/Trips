@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:trips/place/ui/screen/add_place_screen.dart';
 import 'package:trips/user/bloc/user_bloc.dart';
+import 'package:trips/widget/alert.dart';
 
 import 'button_circle.dart';
 
+// ignore: must_be_immutable
 class ButtonsBar extends StatelessWidget{
   UserBloc _userBloc;
 
@@ -30,7 +36,21 @@ class ButtonsBar extends StatelessWidget{
             ),
           ),
           ButtonCircle(
-            onTap: () => print("paso"),
+            onTap: () async{
+              
+              File image;
+              ImagePicker picker = new ImagePicker();
+
+              final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+              image = File(pickedFile.path);
+
+              Navigator.push(context,
+                new MaterialPageRoute(
+                  builder: (BuildContext context) => new AddPlaceScreen(image: image)
+                )
+              );
+            },
             height: 60.0,
             width: 60.0,
             color: Colors.white,

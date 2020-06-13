@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Star extends StatelessWidget {
   bool _boder;
   EdgeInsetsGeometry _margin;

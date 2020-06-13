@@ -33,6 +33,7 @@ dependencies:
   google_sign_in: ^4.5.1
   firebase_storage: ^3.1.6
   cloud_firestore: ^0.13.6
+  image_picker: ^0.6.7+1
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,7 @@ flutter:
     - assets/images/wallpaper_0.jpeg
     - assets/images/wallpaper_1.jpeg
     - assets/images/wallpaper_2.jpeg
+    - assets/images/mountain.png
 
   fonts:
     - family: Lato

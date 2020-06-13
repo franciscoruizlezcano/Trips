@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trips/user/ui/widget/user_info.dart';
+import 'package:trips/widget/header_appbar.dart';
+import 'package:trips/user/ui/widget/buttons_bar.dart';
 
-import 'buttons_bar.dart';
-
+// ignore: must_be_immutable
 class HeaderProfile extends StatelessWidget {
-  String _title;
+  String title;
 
-  HeaderProfile({String title}) {
-    this._title = title;
-  }
+  HeaderProfile({this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +15,7 @@ class HeaderProfile extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0),
-            child: Text(
-              this._title,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-            alignment: Alignment.bottomLeft
-          ),
+          HeaderAppbar(title: this.title, back: false, margin: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 10.0), alignment: Alignment.bottomLeft),
           UserInfo(),
           ButtonsBar(),
         ],

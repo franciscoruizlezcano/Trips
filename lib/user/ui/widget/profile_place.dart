@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:trips/place/model/place.dart';
 import 'package:trips/widget/floating_action_button.dart';
 
+// ignore: must_be_immutable
 class ProfilePlace extends StatelessWidget {
 
   Place _place;
-
 
   ProfilePlace({Place place}){
     this._place = place;
@@ -56,7 +56,10 @@ class ProfilePlace extends StatelessWidget {
       alignment: Alignment.bottomRight,
       children: <Widget>[
         card,
-        FloatingActionButtonGreen()
+        FloatingActionButtonGreen(
+          onPressed:  () => Scaffold.of(context).showSnackBar(SnackBar(content: Text("Naving"))),
+          icon: Icon(Icons.favorite),
+        )
       ],
     );
   }

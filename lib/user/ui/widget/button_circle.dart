@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ButtonCircle extends StatefulWidget{
 
-  VoidCallback _onTap;
-  double _height;
-  double _width;
-  EdgeInsetsGeometry _margin;
-  Icon _icon;
-  Color _color;
+  VoidCallback onTap;
+  double height;
+  double width;
+  EdgeInsetsGeometry margin;
+  Icon icon;
+  Color color;
 
-  ButtonCircle({VoidCallback onTap, double height, double width, EdgeInsetsGeometry margin, Icon icon, Color color}){
-    this._onTap = onTap;
-    this._height = height;
-    this._width = width;
-    this._margin = margin;
-    this._icon = icon;
-    this._color = color;
-  }
+  ButtonCircle({this.onTap, this.height, this.width, this.margin, this.icon, this.color});
 
   @override
   State<StatefulWidget> createState() {
@@ -29,21 +23,17 @@ class ButtonCircle extends StatefulWidget{
 
 class _ButtonCircleState extends State<ButtonCircle>{
 
-  _ButtonCircleState(){
-
-  }
-
   @override
   Widget build(BuildContext context){
     return InkWell(
-      onTap: widget._onTap,
+      onTap: widget.onTap,
       child: Container(
-        height: widget._height,
-        width: widget._width,
-        margin: widget._margin,
-        child: widget._icon,
+        height: widget.height,
+        width: widget.width,
+        margin: widget.margin,
+        child: widget.icon,
         decoration:
-        BoxDecoration(shape: BoxShape.circle, color: widget._color),
+        BoxDecoration(shape: BoxShape.circle, color: widget.color),
       ),
     );
   }

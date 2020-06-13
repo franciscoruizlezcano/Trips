@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:trips/place/bloc/place_bloc.dart';
+import 'package:trips/place/ui/screen/add_place_screen.dart';
 
-import 'package:trips/place/ui/screen/place_screen.dart';
+import 'package:trips/place/ui/screen/home_screen.dart';
 import 'package:trips/user/bloc/user_bloc.dart';
-import 'package:trips/user/ui/screen/search_screen.dart';
+import 'package:trips/place/ui/screen/search_screen.dart';
 import 'package:trips/user/ui/screen/profile_screen.dart';
 
 
@@ -18,9 +20,10 @@ class _NavigationBarState extends State<NavigationBar> {
   int _indexTap = 0;
 
   List<Widget> _pageList = [
-    BlocProvider<UserBloc>(child: PlaceScreen(), bloc: UserBloc()),
+    BlocProvider<UserBloc>(child: HomeScreen(), bloc: UserBloc()),
     BlocProvider<UserBloc>(child: SearchScreen(), bloc: UserBloc()),
     BlocProvider<UserBloc>(child: ProfileScreen(), bloc: UserBloc()),
+    BlocProvider<PlaceBloc>(child: AddPlaceScreen(), bloc: PlaceBloc()),
   ];
 
   void _onTapTapped(int index){

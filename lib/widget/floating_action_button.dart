@@ -1,48 +1,22 @@
 import 'package:flutter/material.dart';
 
-class FloatingActionButtonGreen extends StatefulWidget {
-  @override
-  _FloatingActionButtonGreenState createState() => _FloatingActionButtonGreenState();
-}
+// ignore: must_be_immutable
+class FloatingActionButtonGreen extends StatelessWidget {
 
-class _FloatingActionButtonGreenState extends State<FloatingActionButtonGreen> {
+  Icon icon;
+  VoidCallback onPressed;
 
-  void _onPressed(BuildContext context){
-    showDialog(
-      context: context, 
-      builder: (context) {
-        return AlertDialog(
-          title: Text("On press"),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min, //Se adapta al tamaño del contenido
-            children: <Widget>[
-              Text("You pressed the button")
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: (){
-                Navigator.of(context).pop();
-              }, 
-              child: Text("Ok")
-            )
-          ],
-        );
-      },
-    );
-  }
+  FloatingActionButtonGreen({@required this.icon, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return FloatingActionButton(
       backgroundColor: Colors.green,
       mini: true,
-      tooltip: "Fav",
-      child: Icon(Icons.favorite_border),
-      onPressed: () => this._onPressed(context),
+      child: this.icon,
+      onPressed: this.onPressed,
     );
   }
+
 }

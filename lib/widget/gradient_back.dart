@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class GradientBack extends StatelessWidget {
 
   double width;
@@ -7,7 +8,7 @@ class GradientBack extends StatelessWidget {
   BorderRadiusGeometry borderRadius;
   bool circle = false;
 
-  GradientBack({Key key, @required this.width, @required this.height, @required this.borderRadius, @required this.circle});
+  GradientBack({Key key, @required this.width, @required this.height, this.borderRadius, @required this.circle});
 
 
   @override
