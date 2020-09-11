@@ -1,16 +1,12 @@
-# trips
+### Features
 
-A new Flutter project.
+- Connection with Firebase Storage & Database
+- BLoC pattern
 
-## Getting Started
+# TripsApp
 
-This project is a starting point for a Flutter application.
+![](https://static.platzi.com/media/landing-projects/imagen-flutter.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##Demostration
+[![Watch the video](https://j.gifs.com/VARlBO.gif)](https://dms.licdn.com/playlist/C4D05AQH-gfnpCT7Qaw/mp4-720p-30fp-crf28/0?e=1599948000&v=beta&t=YyHkN56tXlix2rvB8Oohk6OV0_1gWpzoA-CCxH1A9Gs)
